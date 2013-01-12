@@ -1,4 +1,7 @@
 class GamesController < ApplicationController
+  def accept(user)
+  end
+
   # GET /games
   # GET /games.json
   def index

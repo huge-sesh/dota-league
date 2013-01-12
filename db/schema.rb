@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130107225911) do
+ActiveRecord::Schema.define(:version => 20130112231236) do
 
   create_table "games", :force => true do |t|
     t.integer  "p_1_id"
@@ -24,15 +24,25 @@ ActiveRecord::Schema.define(:version => 20130107225911) do
     t.integer  "p_8_id"
     t.integer  "p_9_id"
     t.integer  "p_10_id"
-    t.boolean  "finished"
     t.boolean  "radiant_victory"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
+    t.boolean  "p_1_accept"
+    t.boolean  "p_2_accept"
+    t.boolean  "p_3_accept"
+    t.boolean  "p_4_accept"
+    t.boolean  "p_5_accept"
+    t.boolean  "p_6_accept"
+    t.boolean  "p_7_accept"
+    t.boolean  "p_8_accept"
+    t.boolean  "p_9_accept"
+    t.boolean  "p_10_accept"
+    t.string   "state",           :default => "accepting"
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                  :default => "", :null => false
-    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "email",                  :default => "",                :null => false
+    t.string   "encrypted_password",     :default => "",                :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -41,13 +51,15 @@ ActiveRecord::Schema.define(:version => 20130107225911) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
-    t.float    "mu"
-    t.float    "sigma"
-    t.boolean  "is_admin"
-    t.boolean  "is_mod"
+    t.datetime "created_at",                                            :null => false
+    t.datetime "updated_at",                                            :null => false
+    t.float    "mu",                     :default => 25.0
+    t.float    "sigma",                  :default => 8.333333333333334
+    t.boolean  "is_admin",               :default => false
+    t.boolean  "is_mod",                 :default => false
     t.string   "username"
+    t.boolean  "is_queued",              :default => false
+    t.string   "authentication_token"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
