@@ -4,22 +4,18 @@ class Game < ActiveRecord::Base
   has_many :positions
   has_many :users, :through => :positions
 
-  #def users
-  #  self.positions.map { |p| p.user }
-  #end
-
   def radiant
-    users.slice(0..5)
+    positions.select{|p| p.is_radiant}.map{|p| p.user}
   end
   def dire
-    users.slice(5..10)
+    positions.select{|p| !p.is_radiant}.map{|p| p.user}
   end
   
   def self.create_with_users(users)
     _radiant, _dire, _quality = TrueSkill.balance(users)
     game = Game.create(:quality => _quality)
     (_radiant + _dire).each do |user|
-      Position.create(:user => user, :game => game)
+      Position.create(:user => user, :game => game, :is_radiant => _radiant.include?(user))
       user.dequeue!
     end
     game.save!

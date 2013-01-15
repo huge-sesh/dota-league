@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130115211945) do
+ActiveRecord::Schema.define(:version => 20130115214826) do
 
   create_table "games", :force => true do |t|
     t.boolean  "radiant_victory"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(:version => 20130115211945) do
     t.boolean  "accept",     :default => false
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
+    t.boolean  "is_radiant"
   end
 
   add_index "positions", ["game_id"], :name => "index_positions_on_game_id"
