@@ -3,8 +3,15 @@ League::Application.routes.draw do
   get "home/index"
   devise_for :users
   root :to => "home#index"
-  match 'user/enqueue' => 'users#enqueue'
-  match 'user/dequeue' => 'users#dequeue'
+  resources :users do
+    collection do
+      post 'enqueue'
+      post 'dequeue'
+    end
+  end
+  
+  #match 'users/enqueue' => 'users#enqueue'
+  #match 'users/dequeue' => 'users#dequeue'
 
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'

@@ -23,3 +23,4 @@ gem 'jquery-rails'
 gem 'devise' # user auth
 gem 'trueskill'
 gem 'rubypython'
+gem 'rabl'

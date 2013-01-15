@@ -10,11 +10,11 @@ class User < ActiveRecord::Base
   attr_accessible :username, :email, :password, :password_confirmation, :remember_me
   attr_accessible :mu, :sigma, :is_queued
   attr_protected :is_admin, :is_mod
-  # has_many :game
+  has_many :position
   def enqueue!
     self.is_queued = true
     self.save
-    return Game.check_queue
+    return Game.check_queue!
   end
   def dequeue!
     self.is_queued = false

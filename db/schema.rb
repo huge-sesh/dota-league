@@ -11,34 +11,26 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130112231236) do
+ActiveRecord::Schema.define(:version => 20130115211945) do
 
   create_table "games", :force => true do |t|
-    t.integer  "p_1_id"
-    t.integer  "p_2_id"
-    t.integer  "p_3_id"
-    t.integer  "p_4_id"
-    t.integer  "p_5_id"
-    t.integer  "p_6_id"
-    t.integer  "p_7_id"
-    t.integer  "p_8_id"
-    t.integer  "p_9_id"
-    t.integer  "p_10_id"
     t.boolean  "radiant_victory"
     t.datetime "created_at",                               :null => false
     t.datetime "updated_at",                               :null => false
-    t.boolean  "p_1_accept"
-    t.boolean  "p_2_accept"
-    t.boolean  "p_3_accept"
-    t.boolean  "p_4_accept"
-    t.boolean  "p_5_accept"
-    t.boolean  "p_6_accept"
-    t.boolean  "p_7_accept"
-    t.boolean  "p_8_accept"
-    t.boolean  "p_9_accept"
-    t.boolean  "p_10_accept"
     t.string   "state",           :default => "accepting"
+    t.float    "quality"
   end
+
+  create_table "positions", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "game_id"
+    t.boolean  "accept",     :default => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+  end
+
+  add_index "positions", ["game_id"], :name => "index_positions_on_game_id"
+  add_index "positions", ["user_id"], :name => "index_positions_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "",                :null => false

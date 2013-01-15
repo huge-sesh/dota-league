@@ -1,19 +1,27 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!
-  def enqueue
-    if current_user.enqueue!
-      respond_to do |format|
-        format.html
-        format.json { render :json => Game.last }
-      end
-    else 
-      respond_to do |format|
-        format.html
-        format.json { render :json => User.where(:is_queued => true) }
-      end
+  helper_method :magic_user
+  def magic_user
+    if (current_user.is_admin and params[:fake_user]) 
+      User.find(params[:fake_user])
+    else
+      current_user
     end
   end
+            
+  def enqueue
+    if magic_user.enqueue!
+      @game = Game.last
+      render 'games/game'
+    else 
+      @queue = User.where(:is_queued => true)
+      render 'users/queue'
+    end
+  end
+
   def dequeue
-    current_user.dequeue!
+    magic_user.dequeue!
+      @queue = User.where(:is_queued => true)
+      render 'users/queue'
   end
 end
