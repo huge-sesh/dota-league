@@ -24,4 +24,9 @@ class UsersController < ApplicationController
       @queue = User.where(:is_queued => true)
       render 'users/queue'
   end
+
+  def token
+    @token = magic_user.authentication_token
+    render 'users/token'
+  end
 end

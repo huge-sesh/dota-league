@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
   attr_accessible :mu, :sigma, :is_queued
   attr_protected :is_admin, :is_mod
   has_many :position
+  has_many :game, :through => :position
+
   def enqueue!
     self.is_queued = true
     self.save
@@ -29,5 +31,9 @@ class User < ActiveRecord::Base
     return ret
   end
 
-
+  def after_initialize
+    if new_record?
+      reset_authentication_token!
+    end
+  end
 end
