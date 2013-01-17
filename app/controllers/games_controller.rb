@@ -1,5 +1,8 @@
 class GamesController < ApplicationController
-  def accept(user)
+  def report
+    @game = Game.find(params[:id])
+    @ratings = @game.report!(params[:radiant_victory])
+    render 'games/ratings'
   end
 
   # GET /games

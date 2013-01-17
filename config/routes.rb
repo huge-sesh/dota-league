@@ -7,6 +7,8 @@ League::Application.routes.draw do
     collection do
       post 'enqueue'
       post 'dequeue'
+      post 'accept'
+      post 'decline'
       get  'token'
     end
   end

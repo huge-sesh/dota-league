@@ -10,8 +10,8 @@ class UsersController < ApplicationController
   end
             
   def enqueue
-    if magic_user.enqueue!
-      @game = Game.last
+    @game = magic_user.enqueue!
+    if @game
       render 'games/game'
     else 
       @queue = User.where(:is_queued => true)
@@ -23,6 +23,21 @@ class UsersController < ApplicationController
     magic_user.dequeue!
       @queue = User.where(:is_queued => true)
       render 'users/queue'
+  end
+
+  def accept
+    @game = magic_user.accept!
+    render 'games/game'
+  end
+
+  def decline
+    @game = magic_user.decline!
+    if @game
+      render 'games/game'
+    else
+      @queue = User.where(:is_queued => true)
+      render 'users/queue'
+    end
   end
 
   def token

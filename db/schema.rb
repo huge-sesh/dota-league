@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130115214826) do
+ActiveRecord::Schema.define(:version => 20130117223216) do
 
   create_table "games", :force => true do |t|
     t.boolean  "radiant_victory"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(:version => 20130115214826) do
     t.datetime "updated_at",                               :null => false
     t.string   "state",           :default => "accepting"
     t.float    "quality"
+    t.string   "password",        :default => "cute"
   end
 
   create_table "positions", :force => true do |t|

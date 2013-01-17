@@ -73,10 +73,8 @@ class Printer(object):
       return ('Offering game %s. Use !accept to confirm or !decline to leave the queue'
           '\n  Waiting on: %s'
           '\n  Accepted by: %s'
-          % (game['id'], 
-            names(filter(lambda user: not user['accept'], game['radiant'] + game['dire'])),
-            names(filter(lambda user:     user['accept'], game['radiant'] + game['dire']))))
-    elif game['state'] == 'starting':
+          % (game['id'], names(game['waiting']), names(game['accepted'])))
+    elif game['state'] == 'active':
       return ('Game %s is ready. Join lobby with password %s'
           '\n  Radiant: %s\n  Dire: %s' % (game['password'], names(game['radiant']), names(game['dire'])))
 

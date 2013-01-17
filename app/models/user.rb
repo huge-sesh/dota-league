@@ -22,6 +22,21 @@ class User < ActiveRecord::Base
     self.is_queued = false
     self.save
   end
+  
+  def accept!
+    position = self.positions.find(:accept => false)[0]
+    position.accept = true
+    position.save
+    return position.game.check_accepts!
+  end
+
+  def decline!
+    position = self.positions.find(:accept => false)[0]
+    position.game.destroy
+    self.is_queued = false
+    self.save
+    return Game.check_queue!
+  end
 
   def set_rating!(rating)
     ret = {"old" => {"mu" => self.mu,   "sigma" => self.sigma},  
