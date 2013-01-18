@@ -1,6 +1,6 @@
 import ircutils.bot, traceback, json, pprint, requests
 API_URL = 'http://localhost:3000'
-channel = '#sesh'
+channel = '#seshdota'
 name = 'dotabot'
 
 def names(users): return ', '.join(map(lambda user: user['username'], users))
@@ -77,12 +77,6 @@ class Printer(object):
     elif game['state'] == 'active':
       return ('Game %s is ready. Join lobby with password %s'
           '\n  Radiant: %s\n  Dire: %s' % (game['password'], names(game['radiant']), names(game['dire'])))
-  def ratings(self, ratings):
-    return ('Rating changes from game %s: %s victory. Game quality: %0.2f'
-        '\n  Radiant:' + (''.join(['\n    %s: mu %0.2f %+0.2f | sigma %0.2f %+0.2f' % 
-          (u['username'], u['mu'], u['delta_mu'], u['sigma'], u['delta_sigma']) for u in ratings['radiant'])) +
-        '\n  Dire:' +    (''.join(['\n    %s: mu %0.2f %+0.2f | sigma %0.2f %+0.2f' % 
-          (u['username'], u['mu'], u['delta_mu'], u['sigma'], u['delta_sigma']) for u in ratings['dire'])))
 
 bot = Bot(name)
 bot.connect('irc.synirc.net', channel=channel)

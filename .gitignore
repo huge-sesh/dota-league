@@ -15,3 +15,6 @@
 /tmp
 
 /lib/pyenv/lib
+/lib/pyenv/include
+/lib/pyenv/bin
+/lib/pyenv/.Python
