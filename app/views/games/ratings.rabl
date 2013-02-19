@@ -1,9 +1,10 @@
-object @ratings
+object @game
 
 attributes :quality, :radiant_victory, :id
-child :radiant do
-  attributes :username, :mu, :sigma, :delta_mu, :delta_sigma
-end
-child :dire do
-  attributes :username, :mu, :sigma, :delta_mu, :delta_sigma
+[:radiant, :dire].each do |sym|
+  node sym do
+    @ratings.send(sym).map do |u|
+      attributes :username, :mu, :sigma, :delta_mu, :delta_sigma
+    end
+  end
 end

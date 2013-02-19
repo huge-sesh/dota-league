@@ -1,7 +1,7 @@
 class Game < ActiveRecord::Base
   require "trueskill"
   attr_accessible :state, :radiant_victory, :quality, :users, :positions
-  has_many :positions
+  has_many :positions, :dependent => :destroy
   has_many :users, :through => :positions
   after_destroy :requeue_users
 
@@ -23,13 +23,16 @@ class Game < ActiveRecord::Base
     game = Game.create(:quality => _quality)
     (_radiant + _dire).each do |user|
       Position.create(:user => user, :game => game, :is_radiant => _radiant.include?(user))
-      user.dequeue!
+      #user.dequeue!
     end
     game.save
     return game
   end
 
   def report!(radiant_victory)
+    if self.radiant_victory != nil
+      raise "this game has already been reported"
+    end
     self.radiant_victory = radiant_victory
     TrueSkill.rate(self.radiant, self.dire, radiant_victory)
     self.save

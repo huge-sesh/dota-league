@@ -1,3 +1,8 @@
 <h1>User#token</h1>
 <p>your token is</p>
-<p><%= @token %></p>
+<p><%= magic_user.authentication_token %></p>
+<div>
+  <%= form_tag('/users/reset_token') do %>
+    <%= submit_tag "reset token" %>
+  <% end %>
+</div>

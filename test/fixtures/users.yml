@@ -4,8 +4,52 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-#  column: value
+sesh: 
+  username: sesh
+  is_mod: true
+  is_admin: true
+
+cryle:
+  username: cryle
+  mu: 30.0
+  sigma: 5.0
+
+tomed:
+  username: tomed
+  mu: 30.0
+  sigma: 5.0
+
+luffles:
+  username: luffles
+  mu: 30.0
+  sigma: 5.0
+
+tayler:
+  username: tayler
+  mu: 20.0
+  sigma: 6.0
+
+tangerine:
+  username: tangerine
+  mu: 33.0
+  sigma: 3.0
+
+williedee:
+  username: williedee
+  mu: 17.0
+  sigma: 5.0
+
+bane:
+  username: bane
+  mu: 30.0
+  sigma: 6.0
+
+red:
+  username: red
+  mu: 15.0
+  sigma: 6.0
+
+rlazz:
+  username: rlazz
+  mu: 17.0
+  sigma: 6.0

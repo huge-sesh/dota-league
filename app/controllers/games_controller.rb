@@ -1,7 +1,13 @@
 class GamesController < ApplicationController
+  before_filter :authenticate_user!, :only => :report
+
   def report
-    @game = Game.find(params[:id])
-    @ratings = @game.report!(params[:radiant_victory])
+    if !magic_user.is_mod
+      raise "you're not a mod"
+    end
+    assert params.has_key?(:id) || magic_user.current_game, "need game id or you must currently be in a game"
+    @game = params.has_key?(:id) ? Game.find(params[:id]) : magic_user.current_game
+    @game.report!(params[:radiant_victory])
     render 'games/ratings'
   end
 

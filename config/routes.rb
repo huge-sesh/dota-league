@@ -2,7 +2,7 @@ League::Application.routes.draw do
   resources :games
   get "home/index"
   devise_for :users
-  root :to => "home#index"
+  root :to => "users#token"
   resources :users do
     collection do
       post 'enqueue'
@@ -10,6 +10,8 @@ League::Application.routes.draw do
       post 'accept'
       post 'decline'
       get  'token'
+      post 'reset_token'
+      get  'queue'
     end
   end
   
